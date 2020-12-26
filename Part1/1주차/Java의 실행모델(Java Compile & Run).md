@@ -7,11 +7,17 @@
 
 ### Java Program의 실행 구조와 JVM
 일반적인 프로그램은 운영체제 위에서 실행된다. 그 구조는 아래와 같다.
+
 ![](https://images.velog.io/images/harang/post/96fb8e1d-9d76-4e81-8de7-c4be4a5fc19d/Untitled%20Diagram.jpg)
+
 HW를 기반으로 OS가 동작하고, 그 위에서 Program이 실행되는 구조다. 즉, HW 위에서 실행되는 **OS가 Program을 실행시키는 구조**이다. 하지만, Java Program의 실행 구조는 아래와 같다.
+
 ![](https://images.velog.io/images/harang/post/17cde658-0cf7-49dd-9e43-b7bf61cde76e/2.jpg)
+
 JVM은 OS 위에서 실행되고, **Java Program(정확히는 바이트코드 / \*.class)은 JVM(정확히는 JRE. 핵심 요소가 JVM.) 상에서 실행**된다. 왜 Java Program은 OS 위에서 직접 실행하는 것이 아닌 JVM 상에서 실행하도록 설계한 것일까? 이는 **Java Program을 OS에 상관없이 실행시키기 위함**이다. 일반 Program의 경우, 같은 기능을 수행하는 Program이라도 OS에 따라 다르게 구현해야 한다. But, Java Program의 경우 아래 그림과 같이 코드 수정 없이 다양한 OS 상에서 실행 가능하다.
+
 ![](https://images.velog.io/images/harang/post/c2b3e749-eed7-4832-be7c-28f1200952f2/4.png)
+
 여기서 주목할 점은 Windows 위에서 실행되는 JVM과 Linux 위에서 실행되는 JVM이 다르다는 점이다. 따라서, **각 OS에 맞는 JVM을 설치해야 OS에 상관없이 Java Program을 실행**시킬 수 있다. 그럼 Java는 cross-platform인가? 앞서 내용을 살펴봤다면 쉽게 답을 할 수 있겠지만, 표현에 따라 답이 굉장히 애매해질 수 있다. 따라서, Yes or No로 답하기 보다는 **이에 대한 팩트를 정확히 알고 있느냐**가 중요하다고 생각한다.
 
 ### Java는 정말 cross-platform?
@@ -25,6 +31,7 @@ JVM은 OS 위에서 실행되고, **Java Program(정확히는 바이트코드 / 
 Java 11 JVM 스펙을 기준으로 **Java Source Code가 어떤 과정을 거쳐 실행되는지** 알아보자. 사실 깊게 팔려면 더 깊게 팔 수도 있고, 안그래도 내용이 워낙 많아서 어디까지 포함하여 정리할 지 많이 고민했다. 핵심 흐름을 중심으로 정리했고, 너무 지엽적인 내용은 제외했다. **딱 흐름을 정확하게 이해하기 위해 필요한 수준**을 기준으로 정리했다.
 
 이번에도 개략적인 모델을 먼저 살펴보자. 이는 다음와 같다.
+
 ![](https://images.velog.io/images/harang/post/1df4d89a-de5e-4766-9835-f79ab7e7f368/5.png)
 
 위의 그림에서 알 수 있듯이 Java Source Code가 실행되기까지의 과정은 다음과 같이 정리할 수 있다.

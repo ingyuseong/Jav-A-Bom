@@ -74,14 +74,17 @@ System.out.println(copy1 == copy2);   // true
 
 * `Cop copy1 = new Cop(1);`
   Heap 영역에 새로운 `Cop` 객체를 생성하고, address를 `Cop` 참조형 변수 `copy1` 대입한다. 따라서 `copy1` 새로 생성된 객체를 가리키며, 이는 다음 그림과 같다.
-![](https://images.velog.io/images/harang/post/e77b3db5-8577-4699-965b-3d4b2a3c2746/Shallow%20Copy.png)
+  
+  ![](https://images.velog.io/images/harang/post/e77b3db5-8577-4699-965b-3d4b2a3c2746/Shallow%20Copy.png)
 
 * `Cop copy2 = copy1;`
   `copy1`의 값, 즉 이전 단계에서 생성된 `Cop` 인스턴스의 address를 `copy2`에 대입한다. 따라서 `copy2` 역시 같은 객체를 가리키고, 이는 다음 그림과 같다.
+
   ![](https://images.velog.io/images/harang/post/4e7b1662-7bc7-4717-9792-75a05c96f590/Shallow%20Copy2.png)
  
 * `copy2.setValue(2);`
   `copy2`가 가리키는 `Cop` 인스턴스의 `value`를 `2`로 변경한다. 물론 이는 `copy1`이 가리키는 객체이기도 하다. 따라서, **얕은 복사가 일어났음**을 알 수 있고, 이는 다음 그림과 같다.
+
   ![](https://images.velog.io/images/harang/post/60ebbcf0-d583-4411-ab04-895000a14ea4/Shallow%20Copy3.png)
   
 Bytecode를 통해 그 과정을 실제 JVM의 동작을 직접 확인해보자.
@@ -141,18 +144,22 @@ catch(CloneNotSupportedException e) {
 
 * `Cop copy1 = new Cop(1);`
   앞서 [얕은 복사](#shallow-copy)에서 설명한 과정과 똑같기 때문에, 설명을 생략한다.
+
 ![](https://images.velog.io/images/harang/post/e77b3db5-8577-4699-965b-3d4b2a3c2746/Shallow%20Copy.png)
 
 * `Cop copy2;`
   `copy2`의 선언. 기본값인 `null` 값을 가진다.
+
   ![](https://images.velog.io/images/harang/post/29b42703-62f1-4b15-aba8-9247f858a65a/Deep%20Copy.png)
 
 * `copy2 = (Cop) copy1.clone();`
  `copy1`이 가리키고 있는 **`Cop` 인스턴스의 복사본을 새로 생성**하고, 이의 address 값을 `copy2`에 대입한다.
+
  ![](https://images.velog.io/images/harang/post/b6bccc1d-67c9-4914-81e4-63ca470e4b0b/Deep%20Copy2.png)
 
 * `copy2.setValue(2);`
   `copy2`가 가리키고 있는 `Cop` 인스턴스의 `value`를 `2`로 바꾼다. 이때, `copy1`이 가리키는 인스턴스와 `copy2`가 가리키는 인스턴스는 서로 다르기 때문에, `copy1`의 인스턴스의 `value` 값은 변하지 않는다. **이를 통해 깊은 복사가 일어났음**을 알 수 있다.
+  
   ![](https://images.velog.io/images/harang/post/b1317bd3-51fb-493e-86cb-4eca5132fcae/Deep%20Copy3.png)
   
 얕은 복사와 마찬가지로 Bytecode를 통해 실제 JVM의 동작을 직접 확인해보자.
