@@ -18,7 +18,7 @@ System.out.println(a);  // 2048
 System.out.println(b);  // 1024
 System.out.println(a == b); // false
 ```
-일단 사본의 값을 변경했을 때 원본은 진짜 깊은 복사가 이뤄지는 구만.. 이라고 생각했지만, 초기 `a==b`의 출력값이 `true`라고..? **깊은 복사가 이뤄진다면 `a`의 `2048`과 `b`의 `2048`이 달라야하는 것 아닌가..** 라고 생각할 수도 있지만..! 원래 Java의 `==` 연산자는 값을 비교하기 때문에 이는 깊은 복사와 무관하다. 2개의 변수를 선언했지만, 깊은 복사가 제대로 이루어졌다면 `main()` method에 대한 Local Variable Array의 최대 length는 3이 되어야 할 것이다. 예제 Source Code의 Bytecode를 통해 이를 확인해보았다. 일단 `main()` Method에 대한 Bytecode는 다음과 같다.(출력 코드는 제외 / [Opcode 참고](https://javaalmanac.io/bytecode/))
+일단 위의 코드를 보고나서 사본의 값을 변경했을 때 원본은 진짜 깊은 복사가 이뤄지는 구만.. 이라고 생각했지만, 초기 `a==b`의 출력값이 `true`라고..? **깊은 복사가 이뤄진다면 `a`의 `2048`과 `b`의 `2048`이 달라야하는 것 아닌가..** 라고 생각할 수도 있지만..!(의식의 흐름대로 썼습니다 ㅠ) 원래 Java의 `==` 연산자는 값을 비교하기 때문에 이는 깊은 복사와 무관하다. 2개의 변수를 선언했지만, 깊은 복사가 제대로 이루어졌다면 `main()` method에 대한 Local Variable Array의 최대 length는 3이 되어야 할 것이다. 예제 Source Code의 Bytecode를 통해 이를 확인해보았다. 일단 `main()` Method에 대한 Bytecode는 다음과 같다.(출력 코드는 제외 / [Opcode 참고](https://javaalmanac.io/bytecode/))
 ```java
 ...
 Constant pool:
@@ -39,7 +39,7 @@ SourceFile: "DeepCopy.java"
 위의 Bytecode를 통해 2가지 사실을 확인할 수 있다. 첫 번째로 `locals=3`(`a`의 `2048`, `b`의 `2048`, `b`의 `1024`)이므로 **깊은 복사가 제대로 이루어 졌음을 확인할 수 있다.** 또, 코드는 생략했지만, Runtime Constant Pool에 `int` 리터럴 값이 존재하지 않는 걸로 보아, Primative Type의 깊은 복사는 모두 Stack 영역에서 진행되었음을 알 수 있다.
 
 ## Object
-이제 Object를 살펴보자. 설명하기 전에, 간단한 퀴즈를 하나 소개하겠다. 이미 잘 알고 있다면, 굿이다. 헷갈린다면, 이 글을 잘 읽어보자. 그 후에는 **명확하게** 알 수 있을 것이다.
+이제 Object를 살펴보자. 설명하기 전에, 간단한 퀴즈를 하나 소개하겠다.
 
 ```java
 String name1 = "Deep";
@@ -53,6 +53,7 @@ System.out.println(name1 == name4); // ?
 System.out.println(name1 == "Deep"); // ?
 ```
 
+이미 잘 알고 있다면, 굿이다. 헷갈린다면, 이 글을 잘 읽어보자. 그 후에는 **명확하게** 알 수 있을 것이다.
 
 ### Shallow Copy
 먼저 얕은 복사를 살펴보자. 예제 코드는 다음과 같다.
@@ -140,12 +141,12 @@ catch(CloneNotSupportedException e) {
     e.printStackTrace();
 }
 ```
-참고로, 기존에는 예제 코드처럼 `clone` method의 반환 형이 `Object`이므로 강제 Casting을 해야했다. 하지만, Java 5 이후부터 method overriding 시 return type의 수정을 허용(단, caller의 class로만 수정가능)하기 때문에 Casting없이도 `clone`의 호출이 가능하다(단, return할 때).  또한, `clone` method는 protected로 선언되어 있기 때문에, 꼭 overriding하여 public으로 접근 범위를 넓혀줘야 한다. 이번에도 마찬가지로 코드를 한 줄씩 읽어가며, 과정을 확인해보자.
+참고로, 기존에는 예제 코드처럼 `clone` method의 반환 형이 `Object`이므로 강제 Casting을 해야했다. 하지만, Java 5 이후부터 method overriding 시 caller의 class로 수정하는 경우에 한해 return type의 수정을 허용하기 때문에 **Casting없이도 `clone`의 호출이 가능하다(하지만, 당연히 return하기 전에 caller의 class로 Casting해서 return 해줘야함).**  또한, `clone` method는 protected로 선언되어 있기 때문에, 꼭 overriding하여 public으로 접근 범위를 넓혀줘야 한다. 이번에도 마찬가지로 코드를 한 줄씩 읽어가며, 과정을 확인해보자.
 
 * `Cop copy1 = new Cop(1);`
-  앞서 [얕은 복사](#shallow-copy)에서 설명한 과정과 똑같기 때문에, 설명을 생략한다.
+  앞서 [얕은 복사](#shallow-copy)에서 설명한 과정과 똑같기 때문에, 설명은 생략한다.
 
-![](https://images.velog.io/images/harang/post/e77b3db5-8577-4699-965b-3d4b2a3c2746/Shallow%20Copy.png)
+  ![](https://images.velog.io/images/harang/post/e77b3db5-8577-4699-965b-3d4b2a3c2746/Shallow%20Copy.png)
 
 * `Cop copy2;`
   `copy2`의 선언. 기본값인 `null` 값을 가진다.
@@ -155,7 +156,7 @@ catch(CloneNotSupportedException e) {
 * `copy2 = (Cop) copy1.clone();`
  `copy1`이 가리키고 있는 **`Cop` 인스턴스의 복사본을 새로 생성**하고, 이의 address 값을 `copy2`에 대입한다.
 
- ![](https://images.velog.io/images/harang/post/b6bccc1d-67c9-4914-81e4-63ca470e4b0b/Deep%20Copy2.png)
+  ![](https://images.velog.io/images/harang/post/b6bccc1d-67c9-4914-81e4-63ca470e4b0b/Deep%20Copy2.png)
 
 * `copy2.setValue(2);`
   `copy2`가 가리키고 있는 `Cop` 인스턴스의 `value`를 `2`로 바꾼다. 이때, `copy1`이 가리키는 인스턴스와 `copy2`가 가리키는 인스턴스는 서로 다르기 때문에, `copy1`의 인스턴스의 `value` 값은 변하지 않는다. **이를 통해 깊은 복사가 일어났음**을 알 수 있다.
@@ -194,7 +195,7 @@ Constant pool:
 ```
 마찬가지로, Bytecode를 확인해보면 실제로 **`Cop` 객체가 2개 생성**되었으며, 생성자와 `clone` method가 각각 한 번씩 호출되었음을 확인할 수 있다. 따라서, **깊은 복사가 일어났음**을 알 수 있다. 
 
-이로써 Bytecode level에서 실제 JVM 동작까지 직접 확인하며, 얕은 복사와 깊은 복사에 대해 알아보았다.
+이로써 Bytecode level에서 실제 JVM 동작까지 직접 확인하였고, 얕은 복사와 깊은 복사에 대해 알아보았다.
 
 
 ## 추가 예제
