@@ -79,7 +79,12 @@ HashMap<K,V>의 예
     System.out.println(a.get("three"));
 
 ## 정렬
-정렬의 함수는 아래와같다.
+1. Comparator  
+정렬기준을 별도로 구성하고 싶을때 사용한다. Cmparator는 compare() 메서드를 구현해야 하는데, 이 메서드는 양수를 반환하면 두 값의 순서가 바뀐다(오름차순). 
+
+2. **Comparable**    
+객체 자체에 정렬 기능을 구현하기 위해 사용한다. 그리고 Comparable은 compareTo메서드를 구현해야한다.(구현 안할시 자동으로 오버라이드)
+아래는 sort의 실제 메서드이다.
 
     public static <T extends Comparable<? super T>> void sort(List<T> list) {
         Object[] a = list.toArray();
@@ -87,4 +92,4 @@ HashMap<K,V>의 예
         ...
     }
 
-여기서 살펴보면 sort함수는 List타입만 정렬이 가능하다. 그리고 T는 Comparable인터페이스를 구현하고 있어야한다. 그리고 <? super T>를 보면 T또는 T의 조상 클래스타입의 Comparable이 가능하다.
+여기서 살펴보면 sort함수는 List타입만 정렬이 가능하다. 그리고 T는 Comparable인터페이스를 구현하고 있어야한다. 그리고 <? super T>를 보면 T또는 T의 조상 클래스타입도 가능하다. 즉, T만되는게 아니라 T의 상위 클래스까지도 Comparable할 수 있다는 소리이다.
