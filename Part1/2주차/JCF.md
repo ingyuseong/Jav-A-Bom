@@ -83,7 +83,8 @@ HashMap<K,V>의 예
 정렬기준을 별도로 구성하고 싶을때 사용한다. Cmparator는 compare() 메서드를 구현해야 하는데, 이 메서드는 양수를 반환하면 두 값의 순서가 바뀐다(오름차순). 
 
 2. **Comparable**    
-객체 자체에 정렬 기능을 구현하기 위해 사용한다. 그리고 Comparable은 compareTo메서드를 구현해야한다.(구현 안할시 자동으로 오버라이드)
+객체 자체에 정렬 기능을 구현하기 위해 사용한다. 그리고 Comparable은 compareTo메서드를 구현해야한다.
+
 아래는 sort의 실제 메서드이다.
 
     public static <T extends Comparable<? super T>> void sort(List<T> list) {
