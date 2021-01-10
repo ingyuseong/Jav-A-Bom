@@ -28,11 +28,11 @@
 ```java
 class Box {
 	private Object o;
-    
+
     public void set(Object o) {
     	this.o = o;
     }
-    
+
     public Object get() {
     	return o;
     }
@@ -41,11 +41,11 @@ class Box {
 class Example {
 	public static void main(String[] args) {
     	Box intBox = new Box()
-        
+
         intBox.set(new Integer(1));
-        
+
         Integer intObject = (Integer)intBox.get(); // Casting
-        
+
         System.out.println(intObject);
     }
 }
@@ -57,11 +57,11 @@ class Example {
 class Example {
 	public static void main(String[] args) {
     	Box intBox = new Box()
-        
+
         intBox.set("1"); // Integer가 아닌 String을 인자로 넘겨줌.
-        
+
         Integer intObject = (Integer)intBox.get(); // ClassCastException 발생
-        
+
         System.out.println(intObject);
     }
 }
@@ -82,11 +82,11 @@ class Example {
 ```java
 class Box<T> {
 	private T o;
-    
+
     public void set(T o) {
     	this.o = o;
     }
-    
+
     public T get() {
     	return o;
     }
@@ -95,12 +95,12 @@ class Box<T> {
 class Example {
 	public static void main(String[] args) {
     	Box<Integer> intBox = new Box<Integer>()
-        
+
         intBox.set(new Integer(1));
         // intBox.set("1"); // Compile 과정 중 에러 발견!
-        
+
         Integer intObject = intBox.get(); // X Casting
-        
+
         System.out.println(intObject);
     }
 }
@@ -126,11 +126,11 @@ class Example {
 ```java
 class Box<T extends Number> {
 	private T o;
-    
+
     public void set(T o) {
     	this.o = o;
     }
-    
+
     public T get() {
     	// return o;
         return o.intValue();  // Number 클래스의 메서드 호출 가능!
@@ -176,6 +176,7 @@ class Box<T extends Number> {
 ## 와일드카드(Wildcard)
 와일드카드..? 필자는 처음 와일드카드를 접했을 때 케이팝스타의 와일드카드가 떠올랐다..
 ![](https://img2.sbs.co.kr/img/seditor/VD/2016/01/31/VD41415963_w640.jpg)
+
 이미지 출처: https://programs.sbs.co.kr/enter/kpopstar5/vod/55429/22000160201
 
 혹시 해당 글의 Java Wildcard와 연관성이 있을까하여 찾아봤으나, 무관한 걸로..
@@ -221,11 +222,11 @@ public static void peekBox(Box<?> box) {
 ```java
 class Box<T> {
 	private T o;
-    
+
     public void set(T o) {
     	this.o = o;
     }
-    
+
     public T get() {
     	return o;
     }
@@ -237,7 +238,7 @@ class BoxHandler {
         // box.set(new Number(1)); // Error
         System.out.println(t);
     }
-    
+
     public static void in(Box<Number> box, Number n) {
     	box.set(n);  // Box에 넣기
         // Number num = box.get(); // Error
@@ -252,7 +253,7 @@ class BoxHandler {
 
 #### 상한 제한의 목적
 out 메서드(`public static void out(Box<Number> box)`) 다음과 같이 수정하여 out 메서드에서의 넣는 기능(set)을 제한할 수 있다.
- 
+
  `public static void out(Box<? extends Number> box)`
 
 이때 **set 메서드의 파라미터로 Number 인스턴스를 저장할 수 있는 Box만 전달된다는 사실을 보장할 수 없기 때문에**, set 메서드의 호출은 불가능하다. 즉, 위 메서드의 정의를 통해 다음과 같은 판단을 할 수 있어야 한다.
@@ -261,7 +262,7 @@ out 메서드(`public static void out(Box<Number> box)`) 다음과 같이 수정
 
 #### 하한 제한의 목적
 마찬가지로 in 메서드(`public static void in(Box<Number> box, Number n)`) 다음과 같이 수정하여 out 메서드에서의 넣는 기능(set)을 제한할 수 있다.
- 
+
  `public static void in(Box<? super Number> box, Number n)`
 
 이때 in 메서드에서 get 메서드를 호출하는 라인을 보자. **get 메서드를 통해 반환된 값의 Type이 Number라는 사실을 보장할 수 없기 때문에, get 메서드의 호출문은 컴파일 에러를 발생**시킨다(반환 값의 참조변수 형을 Number로 결정했기 때문에). 즉, 위 메서드의 정의를 통해 다음과 같은 판단을 할 수 있어야 한다.
