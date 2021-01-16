@@ -29,6 +29,7 @@ public static List<Apple> filterGreen(List<Apple> inventory) {
         	result.add(apple);
         }
     }
+	return result;
 }
 ```
 
@@ -50,6 +51,7 @@ public static List<Apple> filterByColor(List<Apple> inventory, Color color) {
         	result.add(apple);
         }
     }
+	return result;
 }
 ```
 이제 다양한 색을 필터링하는 문제는 복붙없이 해결가능하다! 하지만, 무게가 150그램 이상인 사과만 필터링해야하는 문제를 만난다면 어떻게 될까? 또 복붙하여, 매개변수와 핵심 조건부분만 수정하고 있는 본인을 발견하게 될 것이다. 마찬가지로, **보다 다양한 조건을 기준으로 사과를 필터링하는 문제에 유연하게 대응할 수 없다.** 엔지니어의 관점에서 생각해보자. 이를 어떻게 효율적으로 해결할 수 있을까?
@@ -60,7 +62,7 @@ public static List<Apple> filterByColor(List<Apple> inventory, Color color) {
 그럼, *동작 파리미터화를 사용해 기준을 전달한다* 에서 기준은 어떻게 정의될까? 결국 기준은 사과의 속성을 특정한 조건에 맞게 참/거짓(boolean) 값을 반환해야할 것이다. 이렇게 참/거짓 값을 반환하는 함수를 일반적으로 predicate라고 한다. 이러한 함수를 포함하여 선택 조건을 결정하는 인터페이스(함수형 인터페이스)는 다음과 같은 구조일 것이다.
 
 ```java
-public interfacte ApplePredicate {
+public interface ApplePredicate {
 	boolean test (Apple apple);
 }
 ```
@@ -85,6 +87,7 @@ public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate pre
 			result.add(apple);
 		}
 	}
+	return result;
 }
 ```
 
