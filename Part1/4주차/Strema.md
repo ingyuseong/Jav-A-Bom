@@ -400,8 +400,8 @@ Map이랑 같이 많이 쓴다.
     ));
 
 스트림의 변환
-<img src="C:\Users\신완수\자바 공부\자바 스트림 변환1.PNG" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="옵셔널 래퍼"></img><br/>
-<img src="C:\Users\신완수\자바 공부\자바 스트림 변환2.PNG" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="옵셔널 래퍼"></img><br/>
+<img src="C:\Users\신완수\자바 공부\자바 스트림 변환1.PNG" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="스트림 변환1"></img><br/>
+<img src="C:\Users\신완수\자바 공부\자바 스트림 변환2.PNG" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="스트림 변환2"></img><br/>
 
 ## 2. 스트림의 특징
 
