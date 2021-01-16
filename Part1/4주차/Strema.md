@@ -478,9 +478,6 @@ ArrayList, 배열은 랜덤 액세스를 지원(인덱스로 접근)하기 때�
 
 싱글 코어 CPU일 경우에는 순차 처리가 빠르다. 병렬 처리를 할 경우 스레드의 수만 증가하고 번갈아 가면서 스케쥴링을 해야하므로 좋지 못한 결과를 준다. 코어의 수가 많으면 많을 수록 병렬 작업 처리 속도는 빨라진다.
 
-
-
-출처: https://ict-nroo.tistory.com/43 [개발자의 기록습관]
 7. 기본형 스트림 - IntStream, LongStream, DoubleStream
 
 - 오토박싱&언박싱의 비효율이 제거됨(Stream<Integer>대신 IntStream사용)
