@@ -2,10 +2,6 @@
 
 ![](https://media.vlpt.us/images/harang/post/4933a739-0597-4b93-89f6-17d8987e38c4/%EC%9E%A1%EC%95%84%EB%B4%84%20%EC%8D%B8%EB%84%A4%EC%9D%BC.png)
 
-`Java`와 `Spring`을 제대로 빡세게 공부하고 싶은데, 자바봄 모집을 기다리다가 그냥 내가 친구들 꼬셔서 `Java` + `Spring` 스터디를 만들었다. 자바봄의 학습방식을 차용했으며, 이 스터디의 핵심 추구 가치는 **탐구**와 **코드 리뷰**다. 보다 **깊게, 제대로** `Java` + `Spring`을 이해하고, 이를 활용해 쩌는 프로젝트까지 만들어보자. 자바봄을 잡아봅시당 ~,~
-
-<스터디의 모든 구성원은 주도적으로 참여한다. 스터디 계획에 대해 자유롭게 의견을 낼 수 있으며, 필요 시 유동적으로 스터디 계획을 변경할 수 있다.>
-
 ## 학습 목표
 1. `Clean Code`, `Test Code`, `OOP`, `Refactoring` 연습.
 2. [이펙티브 자바](https://g.co/kgs/ja3V4R)를 메인으로 `Java` 학습.
@@ -42,7 +38,7 @@
   2. 토요일 스터디가 끝내고 각자의 회고를 공유하며 이야기 나눈다.
 
 #### `OOP` 프로그램 과제
-스터디에 앞서(&진행 하며), `Java` Basic, `Clean Code`, `Test Code`, `TDD`, `OOP`, `DDD`, `Refactoring`의 개념을 개별적으로 학습한다. (필요시 중요한 개념을 주제를 선정하여 발표 및 토론하며 학습한다.) 아래의 소스를 참고하시면 되겠다.
+스터디에 앞서(&진행 하며), `Java` Basic, `Clean Code`, `Test Code`, `TDD`, `OOP`, `DDD`, `Refactoring`의 개념을 개별적으로 학습한다. (필요시 중요한 개념을 주제를 선정하여 발표 및 토론하며 학습한다.) 아래의 소스를 참고.
 
 * [Java Code Convention](https://google.github.io/styleguide/javaguide.html)
 * [우아한 테크세미나: 우아한 객체지향](https://www.youtube.com/watch?v=dJ5C4qRqAgA&t=1637s)
